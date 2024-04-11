@@ -1,7 +1,6 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 from flask_migrate import Migrate
-from datetime import datetime
 
 from models import db, Message
 
@@ -32,8 +31,8 @@ def messages():
         new_message = Message(
             body=data["body"],
             username=data["username"],
-            created_at=datetime.now(),
-            updated_at=datetime.now(),
+            created_at=db.func.now(),
+            updated_at=db.func.now(),
         )
         
         db.session.add(new_message)
